@@ -37,7 +37,7 @@ const RightSide = (props) => {
       </FollowCard>
       <BannerCard>
         <img
-            src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jgp"
+            src="/images/linkedin-ads.png"
             alt=""
         />
       </BannerCard>
@@ -120,6 +120,7 @@ const Recommendation = styled.div`
 `;
 
 const BannerCard = styled(FollowCard)`
+    padding: 20px;
     img {
         width: 100%;
         height: 100%;
