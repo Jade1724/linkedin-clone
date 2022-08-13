@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import PostModal from './PostModal';
+import PostModal from "./PostModal";
 
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { MdVideoLibrary, MdArticle } from "react-icons/md";
@@ -14,7 +14,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 const Main = (props) => {
   const [showModal, setShowModal] = useState("close");
 
-  const handleClick= (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
     if (e.target !== e.currentTarget) {
       return;
@@ -27,17 +27,22 @@ const Main = (props) => {
         setShowModal("open");
         break;
       default:
-        setShowModal("close")
+        setShowModal("close");
         break;
     }
-  }
+  };
   return (
     <Container>
       <ShareBox>
-        sharebox
         <div>
-          <img src="/images/user.svg" alt="" />
-          <button onClick={handleClick}>Start a post</button>
+          {props.user && props.user.photoURL ? (
+            <img src={[props.user.photoURL]} />
+          ) : (
+            <img src="/images/user.svg" alt="" />
+          )}
+          <button onClick={handleClick} disabled={props.loading ? true : false}>
+            Start a post
+          </button>
         </div>
         <div>
           <button>
@@ -122,7 +127,7 @@ const Main = (props) => {
           </SocialActions>
         </Article>
       </div>
-      <PostModal showModal={showModal} handleClick={handleClick}/>
+      <PostModal showModal={showModal} handleClick={handleClick} />
     </Container>
   );
 };
@@ -298,7 +303,7 @@ const SocialCounts = styled.ul`
       display: flex;
 
       &:first-child {
-        color: #1159A2;
+        color: #1159a2;
       }
 
       &:nth-child(2) {
@@ -306,7 +311,6 @@ const SocialCounts = styled.ul`
       }
     }
   }
-
 `;
 
 const SocialActions = styled.div`
