@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import PostModal from "./PostModal";
+
+import { TailSpin } from "react-loader-spinner";
 
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { MdVideoLibrary, MdArticle } from "react-icons/md";
@@ -74,7 +77,8 @@ const Main = (props) => {
           </button>
         </div>
       </ShareBox>
-      <div>
+      <Content>
+        {props.loading && <TailSpin color="#00BFFF" height={30} width={30} wrapperStyle={{display: "flex", justifyContent: "center"}}/>}
         <Article>
           <SharedActor>
             <a>
@@ -126,7 +130,7 @@ const Main = (props) => {
             </button>
           </SocialActions>
         </Article>
-      </div>
+      </Content>
       <PostModal showModal={showModal} handleClick={handleClick} />
     </Container>
   );
@@ -337,4 +341,19 @@ const SocialActions = styled.div`
     }
   }
 `;
-export default Main;
+
+const Content = styled.div`
+  text-align: center;
+`;
+
+const mapStateToProps = (state) => {
+  return {
+    loading: state.articleState.loading,
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
